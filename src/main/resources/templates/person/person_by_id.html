@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Человек</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css" />
+</head>
+<body>
+<br>
+<a href="/logout">Выход</a>
+<br>
+<br>
+<a href="/person">Ко всем людям</a>
+<br>
+<a href="/car">Ко всем автомобилям</a>
+<br>
+<br>
+<h4>Человек</h4>
+<br>
+<p th:text="${'ID: ' + person.getId()}">VALUE</p>
+<p th:text="${'Имя: ' + person.getFirstName()}">VALUE</p>
+<p th:text="${'Фамилия: ' + person.getLastName()}">VALUE</p>
+<p th:text="${'Email: ' + person.getUsername()}">VALUE</p>
+<br/>
+<a th:href="@{/person/{id}/update_person(id=${person.getId()})}">Изменить</a>
+<br/>
+<br>
+<h4>Автомобили человека</h4>
+<br>
+
+<div>
+    <table>
+        <tr>
+            <th>Модель</th>
+            <th>Серийный номер</th>
+            <th>Перейти</th>
+            <th>Удалить</th>
+        </tr>
+        <tr th:each="all_cars : ${car}">
+            <td th:utext="${all_cars.getModel()}">Модель</td>
+            <td th:utext="${all_cars.getSeries()}">Серийный номер</td>
+            <td><a th:href="'/car/' + ${all_cars.getId()}">Перейти</a></td>
+            <td><a th:href="'/car/' + ${all_cars.getId()} + '/delete_car'">Удалить</a></td>
+        </tr>
+    </table>
+</div>
+<br>
+<h4>Добавить автомобиль человеку</h4>
+<br>
+<form th:method="POST" th:action="@{/person/{id}/new_car_to_person(id=${person.getId()})}" th:object="${new_car}">
+    <label for="model">Модель</label>
+    <input type="text" th:field="*{model}" id="model"/>
+    <div style="color:red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model error</div>
+    <br/>
+    <laber for="series">Серийный номер</laber>
+    <input type="text" th:field="*{series}" id="series"/>
+    <div style="color: red"  th:if="${#fields.hasErrors('series')}" th:errors="*{series}">Series error</div>
+    <br/>
+    <input type="submit" value="Сохранить"/>
+</form>
+</body>
+</html>

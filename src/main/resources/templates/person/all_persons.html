@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все люди</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css" />
+</head>
+
+<body>
+<br>
+<a href="/logout">Выход</a>
+<br>
+<a href="/car">Ко всем автомобилям</a>
+<br>
+<br>
+<h4>Список людей</h4>
+<br>
+<br>
+<div>
+    <table>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Перейти</th>
+            <th>Удалить</th>
+        </tr>
+        <tr th:each="all_persons : ${persons}">
+            <td th:utext="${all_persons.firstName}">Имя</td>
+            <td th:utext="${all_persons.getLastName}">Фамилия</td>
+            <td><a th:href="'/person/' + ${all_persons.getId()}">Перейти</a></td>
+            <td><a th:href="'/person/' + ${all_persons.getId()} + '/delete_person'">Удалить</a></td>
+        </tr>
+    </table>
+</div>
+
+<br/>
+<hr/>
+
+<a href="/person/new_person">Сохранить нового человека</a>
+
+</body>
+</html>

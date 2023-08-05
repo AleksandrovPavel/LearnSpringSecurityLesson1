@@ -15,7 +15,6 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = "roles")
 public class Role implements GrantedAuthority {
 
     @Id
@@ -26,7 +25,6 @@ public class Role implements GrantedAuthority {
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private Set<Person> persons;
-
 
     @Override
     public String getAuthority() {

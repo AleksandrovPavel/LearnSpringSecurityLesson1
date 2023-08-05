@@ -36,9 +36,7 @@ public class Person implements UserDetails {
     @OneToMany(mappedBy = "person", cascade = CascadeType.DETACH, orphanRemoval = true)
     private Set<Car> cars;
 
-    @ManyToMany
-    @JoinTable(joinColumns = {@JoinColumn(name = "person_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     @Override

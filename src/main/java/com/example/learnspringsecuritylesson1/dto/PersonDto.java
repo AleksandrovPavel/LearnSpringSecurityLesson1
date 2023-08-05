@@ -10,8 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-@EqualsAndHashCode
-@ToString
 public class PersonDto {
 
     @NotEmpty(message = "Должно быть заполнено")
@@ -26,5 +24,5 @@ public class PersonDto {
     @NotEmpty(message = "Должно быть заполнено")
     private String password;
 
-    private List<String> roleNames;
+    private List<String> roles;
 }

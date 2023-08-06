@@ -11,7 +11,7 @@
 <a href="/logout">Выход</a>
 <br>
 <br>
-<a href="/person">Ко всем людям</a>
+<a href="/admin/person">Ко всем людям</a>
 <br>
 <br>
 <h4>Список автомобилей</h4>
@@ -27,7 +27,7 @@
         <tr th:each="all_cars : ${cars}">
             <td th:utext="${all_cars.getModel()}">Модель</td>
             <td th:utext="${all_cars.getSeries()}">Серийный номер</td>
-            <td> <a th:href="'/car/' + ${all_cars.getId()}">Перейти</a></td>
+            <td> <a th:href="'/admin/car/' + ${all_cars.getId()}">Перейти</a></td>
         </tr>
     </table>
 </div>

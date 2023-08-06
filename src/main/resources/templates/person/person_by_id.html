@@ -10,9 +10,9 @@
 <a href="/logout">Выход</a>
 <br>
 <br>
-<a href="/person">Ко всем людям</a>
+<a href="/admin/person">Ко всем людям</a>
 <br>
-<a href="/car">Ко всем автомобилям</a>
+<a href="/admin/car">Ко всем автомобилям</a>
 <br>
 <br>
 <h4>Человек</h4>
@@ -22,7 +22,7 @@
 <p th:text="${'Фамилия: ' + person.getLastName()}">VALUE</p>
 <p th:text="${'Email: ' + person.getUsername()}">VALUE</p>
 <br/>
-<a th:href="@{/person/{id}/update_person(id=${person.getId()})}">Изменить</a>
+<a th:href="@{/admin/person/{id}/update_person(id=${person.getId()})}">Изменить</a>
 <br/>
 <br>
 <h4>Автомобили человека</h4>
@@ -39,15 +39,15 @@
         <tr th:each="all_cars : ${car}">
             <td th:utext="${all_cars.getModel()}">Модель</td>
             <td th:utext="${all_cars.getSeries()}">Серийный номер</td>
-            <td><a th:href="'/car/' + ${all_cars.getId()}">Перейти</a></td>
-            <td><a th:href="'/car/' + ${all_cars.getId()} + '/delete_car'">Удалить</a></td>
+            <td><a th:href="'/admin/car/' + ${all_cars.getId()}">Перейти</a></td>
+            <td><a th:href="'/admin/car/' + ${all_cars.getId()} + '/delete_car'">Удалить</a></td>
         </tr>
     </table>
 </div>
 <br>
 <h4>Добавить автомобиль человеку</h4>
 <br>
-<form th:method="POST" th:action="@{/person/{id}/new_car_to_person(id=${person.getId()})}" th:object="${new_car}">
+<form th:method="POST" th:action="@{/admin/person/{id}/new_car_to_person(id=${person.getId()})}" th:object="${new_car}">
     <label for="model">Модель</label>
     <input type="text" th:field="*{model}" id="model"/>
     <div style="color:red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model error</div>

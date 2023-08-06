@@ -4,6 +4,7 @@ package com.example.learnspringsecuritylesson1.controller;
 import com.example.learnspringsecuritylesson1.dto.CarDto;
 import com.example.learnspringsecuritylesson1.dto.PersonDto;
 import com.example.learnspringsecuritylesson1.service.PersonService;
+import com.example.learnspringsecuritylesson1.service.RoleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,14 +13,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/person")
+@RequestMapping("/admin/person")
 public class PersonController {
 
     private final PersonService personService;
+    private final RoleService roleService;
 
     @Autowired
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, RoleService roleService) {
         this.personService = personService;
+        this.roleService = roleService;
     }
 
     @GetMapping()
@@ -47,45 +50,49 @@ public class PersonController {
             return "person/person_by_id";
         }
         personService.saveCarToPerson(personId, carDto);
-        return "redirect:/person/" + personId;
+        return "redirect:/admin/person/" + personId;
     }
 
     @GetMapping("/new_person")
-    public String newUser(@ModelAttribute("person") PersonDto personDto) {
+    public String newUser(@ModelAttribute("person") PersonDto personDto, Model model) {
+        model.addAttribute("roles", roleService.getAllRoles());
         return "person/new_person";
     }
 
     @PostMapping("/save_person")
     public String saveUser(@ModelAttribute("person") @Valid PersonDto personDto,
-                           BindingResult bindingResult) {
+                           BindingResult bindingResult, Model model) {
+        model.addAttribute("roles", roleService.getAllRoles());
         if (bindingResult.hasErrors()) {
             return "person/new_person";
         }
         personService.savePerson(personDto);
-        return "redirect:/person";
+        return "redirect:/admin/person";
     }
 
     @GetMapping("/{person-id}/update_person")
     public String edit(@PathVariable("person-id") Long personId, Model model) {
         model.addAttribute("person", personService.getPersonById(personId));
+        model.addAttribute("roles", roleService.getAllRoles());
         return "person/update_person";
     }
 
     @PostMapping("/{person-id}")
     public String update(@ModelAttribute("update_person") @Valid PersonDto personDto,
                          BindingResult bindingResult,
-                         @PathVariable("person-id") Long personId) {
+                         @PathVariable("person-id") Long personId, Model model) {
+        model.addAttribute("roles", roleService.getAllRoles());
         if (bindingResult.hasErrors()) {
             return "person/update_person";
         }
         personService.updatePerson(personId, personDto);
-        return "redirect:/person/" + personId;
+        return "redirect:/admin/person/" + personId;
     }
 
     @GetMapping("/{person-id}/delete_person")
     public String delete(@PathVariable("person-id") Long carId) {
         personService.deletePerson(carId);
-        return "redirect:/person";
+        return "redirect:/admin/person";
     }
 
 

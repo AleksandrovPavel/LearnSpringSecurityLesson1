@@ -1,10 +1,13 @@
 package com.example.learnspringsecuritylesson1.dto;
 
+import com.example.learnspringsecuritylesson1.model.Role;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,8 +24,8 @@ public class PersonDto {
     @Email(message = "Введите корректный email")
     private String username;
 
-    @NotEmpty(message = "Должно быть заполнено")
+    @Min(4)
     private String password;
 
-    private List<String> roles;
+    private Set<Role> roles;
 }

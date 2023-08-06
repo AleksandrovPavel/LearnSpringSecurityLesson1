@@ -10,7 +10,7 @@
 <br>
 <a href="/logout">Выход</a>
 <br>
-<a href="/car">Ко всем автомобилям</a>
+<a href="/admin/car">Ко всем автомобилям</a>
 <br>
 <br>
 <h4>Список людей</h4>
@@ -27,8 +27,8 @@
         <tr th:each="all_persons : ${persons}">
             <td th:utext="${all_persons.firstName}">Имя</td>
             <td th:utext="${all_persons.getLastName}">Фамилия</td>
-            <td><a th:href="'/person/' + ${all_persons.getId()}">Перейти</a></td>
-            <td><a th:href="'/person/' + ${all_persons.getId()} + '/delete_person'">Удалить</a></td>
+            <td><a th:href="'/admin/person/' + ${all_persons.getId()}">Перейти</a></td>
+            <td><a th:href="'/admin/person/' + ${all_persons.getId()} + '/delete_person'">Удалить</a></td>
         </tr>
     </table>
 </div>
@@ -36,7 +36,7 @@
 <br/>
 <hr/>
 
-<a href="/person/new_person">Сохранить нового человека</a>
+<a href="/admin/person/new_person">Сохранить нового человека</a>
 
 </body>
 </html>

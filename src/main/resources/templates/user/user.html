@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Человек</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css" />
+</head>
+<body>
+<br>
+<a href="/logout">Выход</a>
+<br>
+<br>
+<div sec:authorize="hasRole('ADMIN')">
+<a href="/admin/person">Ко всем людям</a>
+<br>
+<a href="/admin/car">Ко всем автомобилям</a>
+</div>
+<br>
+<br>
+<h4>Человек</h4>
+<br>
+<p th:text="${'Имя: ' + person.getFirstName()}">VALUE</p>
+<p th:text="${'Фамилия: ' + person.getLastName()}">VALUE</p>
+<p th:text="${'Email: ' + person.getUsername()}">VALUE</p>
+<br>
+<h4>Автомобили человека</h4>
+<br>
+
+<div>
+    <table>
+        <tr>
+            <th>Модель</th>
+            <th>Серийный номер</th>
+        </tr>
+        <tr th:each="all_cars : ${car}">
+            <td th:utext="${all_cars.getModel()}">Модель</td>
+            <td th:utext="${all_cars.getSeries()}">Серийный номер</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

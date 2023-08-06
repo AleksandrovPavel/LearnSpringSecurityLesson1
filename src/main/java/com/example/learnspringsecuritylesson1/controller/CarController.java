@@ -11,7 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/car")
+@RequestMapping("/admin/car")
 public class CarController {
 
     private final CarServiceImpl carService;
@@ -36,7 +36,7 @@ public class CarController {
     @GetMapping("/{car-id}/transition")
     public String transition(@PathVariable("car-id") Long carId) {
         long number = carService.idPerson(carId);
-        return "redirect:/person/" + number;
+        return "redirect:/admin/person/" + number;
     }
 
 
@@ -56,13 +56,13 @@ public class CarController {
         }
         long number = carService.idPerson(carId);
         carService.updateCar(carId, carDto);
-        return "redirect:/person/" + number;
+        return "redirect:/admin/person/" + number;
     }
     @GetMapping("/{car-id}/delete_car")
     public String delete(@PathVariable("car-id") Long carId) {
         long number = carService.idPerson(carId);
         carService.deleteCar(carId);
-        return "redirect:/person/" + number;
+        return "redirect:/admin/person/" + number;
     }
 
 }

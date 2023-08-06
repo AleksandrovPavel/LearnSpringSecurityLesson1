@@ -32,13 +32,13 @@ public class SecurityConfig {
         return http.
                 csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/register", "/auth/login").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/person/**", "/car/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/auth/register", "/auth/login").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin(login -> login
                         .loginPage("/auth/login")
-                        .defaultSuccessUrl("/person", true)
+                        .defaultSuccessUrl("/user", true)
                         .failureUrl("/auth/login?error=true")
                 ).logout(logout -> logout
                         .logoutUrl("/logout")

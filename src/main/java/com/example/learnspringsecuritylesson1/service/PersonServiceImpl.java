@@ -54,6 +54,7 @@ public class PersonServiceImpl implements PersonService {
         person.setFirstName(personDto.getFirstName());
         person.setUsername(personDto.getUsername());
         person.setPassword(passwordEncoder.encode(personDto.getPassword()));
+        person.setRoles(personDto.getRoles());
         personRepository.save(person);
     }
 
@@ -63,7 +64,7 @@ public class PersonServiceImpl implements PersonService {
         Person personUpdate = personRepository.findById(personId).orElseThrow();
         personUpdate.setFirstName(personDto.getFirstName());
         personUpdate.setLastName(personDto.getLastName());
-        personUpdate.setPassword(passwordEncoder.encode(personUpdate.getPassword()));
+        personUpdate.setRoles(personDto.getRoles());
         personRepository.save(personUpdate);
     }
 

@@ -10,9 +10,9 @@
 <a href="/logout">Выход</a>
 <br>
 <br>
-<a href="/person">Ко всем людям</a>
+<a href="/admin/person">Ко всем людям</a>
 <br>
-<a href="/car">Ко всем автомобилям</a>
+<a href="/admin/car">Ко всем автомобилям</a>
 <br>
 <br>
 <h4>Автомобиль</h4>
@@ -22,10 +22,10 @@
 <p th:text="${'ID: ' + car.getId()}">VALUE</p>
 <p th:text="${'Модель: ' + car.getModel()}">VALUE</p>
 <p th:text="${'Номер автомобиля: ' + car.getSeries()}">VALUE</p>
-<a th:href="@{/car/{id}/transition(id=${car.getId()})}">Хозяин автомобиля</a>
+<a th:href="@{/admin/car/{id}/transition(id=${car.getId()})}">Хозяин автомобиля</a>
 <br/>
 <br/>
-<a th:href="@{/car/{id}/update(id=${car.getId()})}">Изменить</a>
+<a th:href="@{/admin/car/{id}/update(id=${car.getId()})}">Изменить</a>
 <br/>
 </form>
 </body>

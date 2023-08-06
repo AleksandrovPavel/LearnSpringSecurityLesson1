@@ -3,40 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Новый человек</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"/>
 </head>
 <body>
 <br>
 <a href="/logout">Выход</a>
 <br>
 <br>
-<a href="/person">Ко всем людям</a>
+<a href="/admin/person">Ко всем людям</a>
 <br>
-<a href="/car">Ко всем автомобилям</a>
+<a href="/admin/car">Ко всем автомобилям</a>
 <br>
 <br>
 <h4>Создать человека</h4>
 <br>
 <br>
 
-<form th:method="POST" th:action="@{/person/save_person}" th:object="${person}">
+<form th:method="POST" th:action="@{/admin/person/save_person}" th:object="${person}">
     <label for="firstName">Имя</label>
     <input type="text" th:field="*{firstName}" id="firstName"/>
     <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name error</div>
-    <br/>
+    <br>
     <laber for="lastName">Фамилия</laber>
     <input type="text" th:field="*{lastName}" id="lastName"/>
-    <div style="color: red"  th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name error</div>
-    <br/>
+    <div style="color: red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name error</div>
+    <br>
     <laber for="email">Email</laber>
     <input type="text" th:field="*{username}" id="email"/>
-    <div style="color:red"  th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Email error</div>
-    <br/>
-    <br/>
+    <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Email error</div>
+    <br>
     <laber for="password">Пороль</laber>
     <input type="text" th:field="*{password}" id="password"/>
-    <div style="color:red"  th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
-    <br/>
+    <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</div>
+    <br>
+    <p>
+        <label> Roles:
+            <input type="checkbox" name="roles"
+                   th:each="role : ${roles}"
+                   th:text="${role.getName()}"
+                   th:value="${role.getId()}"
+                   th:field="*{roles}"
+                   th:checkbox="${role.getName() == person.getRoles()}"
+            />
+        </label>
+    </p>
+    <br>
+    <br>
     <input type="submit" value="Сохранить"/>
 </form>
 
